@@ -14,7 +14,6 @@ _Herramientas utilizadas para el desarrollo del proyecto_
 TYPESCRIPT
 NODE JS
 EXPRESS JS
-MYSQL
 TYPEORM
 ```
 
@@ -138,7 +137,7 @@ _Los siguientes paquete son los utilizados para el desarrollo_
 * [Cors](https://www.npmjs.com/package/cors) - Paquete para poder utilizar solicitar recursos restringidos
 * [Dotenv](https://www.npmjs.com/package/dotenv) - Paquete para poder utilizar leer variables de entornos
 * [TypeORM](https://www.npmjs.com/package/typeorm) - Paquete para crear la base de datos y hacer las migraciones
-* [MySql](https://www.npmjs.com/package/mysql) - Paquete usado para la conexion a la base de datos
+
 
 ### Autor ✒️
 

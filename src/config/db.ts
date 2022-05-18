@@ -5,12 +5,13 @@ const AppDataSource = new DataSource ({
     type: "mysql",
     host: "localhost",
     port: 3306,
-    username: "root",
-    password: "cris12302203Aammg",
-    database: "schooldb",
+    username: "YOUR_USERNAME",
+    password: "YOU_PASSWORD",
+    database: "YOUR_DATABASE",
     entities: [Student],
     logging: true,
-    synchronize: true
+    synchronize: true,
+    ssl: true
 })
 
 export const database = () => {
