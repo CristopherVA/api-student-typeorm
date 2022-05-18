@@ -6,8 +6,8 @@ const AppDataSource = new DataSource ({
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "cris12302203Aammg",
-    database: "schooldb",
+    password: "YOURPASSWORD",
+    database: "CREATE DATABASE IN ADD HERE",
     entities: [Student],
     logging: true,
     synchronize: true
