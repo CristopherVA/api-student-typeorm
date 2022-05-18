@@ -58,7 +58,12 @@ const AppDataSource = new DataSource ({
 ## Correr el servidor desde la terminal con el siguiente comando 🔧
 
 ```
+Este comando corre la api en modo local
 npm start
+
+Este comando corre la api en modo desarrollo
+npm run dev
+
 ```
 
 
