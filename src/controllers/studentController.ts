@@ -8,7 +8,9 @@ export const getAllStudent = async (req: Request, res: Response) => {
     res.status(200).send(student);
   } catch (error) {
     if (error instanceof Error) {
-      return res.status(404).json({ ok: true, message: "Estudiante no encontrado" });
+      return res
+        .status(404)
+        .json({ ok: true, message: "Estudiante no encontrado" });
     }
   }
 };
@@ -19,7 +21,7 @@ export const getOneStudent = async (req: Request, res: Response) => {
     const userId = parseInt(id);
     console.log(userId);
     const student = await Student.findOneBy({ id: userId });
-    res.status(200).send({ok: true, student });
+    res.status(200).send({ ok: true, student });
   } catch (error) {
     res.status(404).send({ message: "Estudiante no encontrado" });
   }
@@ -40,7 +42,7 @@ export const getOneDelete = async (req: Request, res: Response) => {
     const userId = parseInt(id);
     console.log(userId);
     const student = await Student.findOneBy({ id: userId });
-    res.status(200).send({ok: true, student });
+    res.status(200).send({ ok: true, student });
   } catch (error) {
     res.status(404).send({ message: "Estudiante no encontrado" });
   }
@@ -58,7 +60,6 @@ export const createStudent = async (req: Request, res: Response) => {
         message: "El estudiante tiene que tener 16 años",
       });
     } else {
-
       const student = new Student();
 
       student.name = name;
@@ -87,6 +88,8 @@ export const updateStudent = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { name, dateBirth, course } = req.body;
     const userId = parseInt(id);
+    
+    const age = getAge(dateBirth);
 
     const student = await Student.findOneBy({ id: userId });
 
@@ -94,11 +97,23 @@ export const updateStudent = async (req: Request, res: Response) => {
       return res.status(404).send({ message: "Estudiante no encontrado" });
     }
 
-    await Student.update({ id: userId }, { name, dateBirth, course });
+    if (age <= 15) {
+      return res.status(400).send({
+        ok: false,
+        message: "El estudiante tiene que tener 16 años",
+      });
+    } else {  
+      const studentUpdate = await Student.update(
+        { id: userId },
+        { name, dateBirth, course }
+      );
 
-    return res
-      .status(200)
-      .send({ ok: true, message: "Estudiante actializado correctamente", student });
+      return res.status(200).send({
+        ok: true,
+        message: "Estudiante actializado correctamente",
+        studentUpdate,
+      });
+    }
   } catch (error) {
     if (error instanceof Error) {
       return res
@@ -121,12 +136,10 @@ export const deleteStudent = async (req: Request, res: Response) => {
 
     await Student.update({ id: userId }, { status: false });
 
-    return res
-      .status(200)
-      .send({ 
-          ok: true,
-          message: "Estudiante eliminado correctamente"
-     });
+    return res.status(200).send({
+      ok: true,
+      message: "Estudiante eliminado correctamente",
+    });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
